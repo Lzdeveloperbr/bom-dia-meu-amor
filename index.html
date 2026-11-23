@@ -55,9 +55,35 @@ footer{text-align:center;padding:30px 15px 40px;color:#a98d9b;font-size:.65rem;l
 @keyframes float{50%{transform:translateY(-12px)}}@keyframes spin{to{transform:rotate(360deg)}}@keyframes twinkle{to{opacity:.2;transform:scale(.5)}}@keyframes rise{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:none}}@keyframes bob{50%{transform:translateY(5px)}}@keyframes fall{to{transform:translate3d(var(--x),110vh,0) rotate(520deg);opacity:0}}@keyframes heartbeat{0%,100%{transform:scale(1)}12%{transform:scale(1.12)}24%{transform:scale(1)}36%{transform:scale(1.08)}48%{transform:scale(1)}} 
 @media(max-width:650px){header{padding:14px 16px}.brand{font-size:.58rem}nav{gap:11px}nav a{font-size:.58rem}nav a:nth-child(3),nav a:nth-child(4){display:none}.sound{padding:8px 10px}.hero{min-height:94svh}.rose-stage{min-height:380px}.memories{grid-template-columns:repeat(2,1fr)}.memory:last-child{display:none}.counter{grid-template-columns:repeat(2,1fr);max-width:380px}.count{padding:18px 6px}.moment{margin-left:45px;padding:19px}.timeline:before{left:15px}.moment:before{left:-35px}.content{padding:70px 0!important}}
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition-duration:.01ms!important}}
+
+/* Refinamentos: navegação, acessibilidade e experiências extras */
+:focus-visible{outline:2px solid #f3cbd5;outline-offset:4px}
+::selection{background:#e6a9b9;color:#281522}
+.reading-progress{position:fixed;z-index:40;top:0;left:0;width:0;height:3px;background:linear-gradient(90deg,#e8a9bd,#f1d4a7);box-shadow:0 0 12px #efb7ca;transition:width .08s linear}
+.float-tools{position:fixed;z-index:14;right:18px;bottom:18px;display:flex;flex-direction:column;gap:9px}
+.float-tools button{width:44px;height:44px;border:1px solid #ffffff38;border-radius:50%;background:#2c1a2dcc;color:#f8e5ea;backdrop-filter:blur(12px);font-size:1.05rem;cursor:pointer;box-shadow:0 8px 25px #0005;transition:transform .2s,background .2s}
+.float-tools button:hover{transform:translateY(-3px);background:#6a3855}
+.potion-card{max-width:700px;margin:auto;padding:clamp(25px,5vw,42px);text-align:center;position:relative;overflow:hidden}
+.potion-orb{width:112px;height:130px;margin:4px auto 22px;position:relative;display:grid;place-items:center;filter:drop-shadow(0 12px 20px #e7a7ba33)}
+.potion-orb:before{content:"";position:absolute;inset:10px 18px 0;border:2px solid #f3d9e477;border-radius:28px 28px 38px 38px;background:linear-gradient(160deg,#ffffff20 0 20%,#e5a5c455 21% 100%);clip-path:polygon(28% 0,72% 0,72% 20%,100% 42%,92% 100%,8% 100%,0 42%,28% 20%)}
+.potion-orb:after{content:"✧";position:absolute;color:#ffe9b9;font-size:2.2rem;text-shadow:0 0 20px #f4c7d6;animation:twinkle 1.8s infinite alternate}
+.potion-card h3{font:500 1.7rem var(--serif);margin:0 0 10px;color:#f5d9e1}
+.potion-card p{color:var(--muted);line-height:1.8;max-width:490px;margin:0 auto 20px;font-size:.88rem}
+.potion-result{min-height:54px;max-width:520px;margin:18px auto 0;padding:14px 18px;border:1px solid #ffffff20;border-radius:14px;background:#ffffff09;color:#f4dce3;font:italic 1.05rem/1.6 var(--serif)}
+.photo-tools{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin:0 0 18px}
+.photo-tools .btn{padding:12px 17px;font-size:.64rem}
+.photo-hint{color:#bda8b4;font-size:.68rem;text-align:center;margin:-5px 0 18px}
+.memory{min-width:0}
+.memory .uploaded-photo{width:100%;height:100%;object-fit:cover;position:absolute;inset:0}
+.memory .remove-photo{position:absolute;z-index:2;right:8px;top:8px;width:30px;height:30px;border:1px solid #ffffff66;border-radius:50%;background:#251624bb;color:white;cursor:pointer;font-size:1rem}
+.memory.uploaded:after{content:"";position:absolute;inset:55% 0 0;background:linear-gradient(transparent,#160e1c88);pointer-events:none}
+.memory.uploaded .photo-label{position:absolute;z-index:1;bottom:12px;left:10px;right:10px;color:#fff;font-size:.7rem;text-shadow:0 2px 8px #000;text-align:left}
+@media(max-width:650px){.float-tools{right:12px;bottom:12px}.float-tools button{width:40px;height:40px}.photo-tools .btn{font-size:.6rem}}
+
 </style>
 </head>
 <body>
+<div class="reading-progress" id="readingProgress" aria-hidden="true"></div>
 <div class="noise"></div><div class="glow a"></div><div class="glow b"></div><div class="stars" id="stars"></div>
 <header><div class="brand">um presente <span>♡</span> para Andressa</div><nav><a href="#jardim">jardim</a><a href="#carta">carta</a><a href="#historia">história</a><a href="#memorias">memórias</a></nav><button class="sound" id="musicBtn" type="button" aria-label="Ir para a música">♫ Música</button></header>
 <main>
@@ -74,6 +100,7 @@ footer{text-align:center;padding:30px 15px 40px;color:#a98d9b;font-size:.65rem;l
 <svg class="rose-svg" viewBox="0 0 230 280" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="petal" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#ffd5df"/><stop offset=".5" stop-color="#d86c91"/><stop offset="1" stop-color="#812d53"/></linearGradient><linearGradient id="leaf" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#9dbb91"/><stop offset="1" stop-color="#355b49"/></linearGradient></defs><path d="M115 130 C112 175 120 210 111 260" stroke="#63866b" stroke-width="5" fill="none"/><path d="M114 208 C75 170 47 201 104 224Z" fill="url(#leaf)"/><path d="M115 231 C154 187 183 212 122 246Z" fill="url(#leaf)"/><g id="bloom"><path d="M115 128 C55 116 69 54 110 71 C93 24 158 22 143 76 C192 51 202 111 145 126 C178 147 143 177 115 143 C82 175 43 143 87 119Z" fill="url(#petal)" stroke="#f4b4c7" stroke-width="1.2"/><path d="M115 128 C75 99 100 54 123 83 C151 57 177 101 139 126 C160 150 124 164 115 137 C96 158 75 129 115 128Z" fill="#b94370"/><path d="M115 128 C98 105 120 83 135 102 C151 118 131 144 115 128Z" fill="#f5b6c8"/><path d="M112 123 Q118 109 128 119 Q131 130 119 134Z" fill="#7b294b"/></g></svg></button><div class="rose-caption" id="roseCaption">para a minha pessoa favorita ♡</div></div></section>
 <section class="content reveal" id="jardim"><div class="section-head"><span class="eyebrow">cultivado com carinho</span><h2>Nosso jardim do amor.</h2><p>Cada flor representa um carinho, um cuidado e um motivo para continuar fazendo nosso amor florescer.</p></div><div class="garden-wrap glass"><div class="garden-sky"></div><div class="garden-moon"></div><div class="garden-hill"></div><div class="garden-bed" id="gardenBed" aria-label="Jardim interativo"><div class="garden-flower"><div class="garden-stem"></div><i class="garden-leaf"></i><i class="garden-leaf right"></i><div class="garden-head"><i class="garden-petal"></i><i class="garden-petal"></i><i class="garden-petal"></i><i class="garden-petal"></i><i class="garden-petal"></i><i class="garden-center"></i></div></div><div class="garden-flower"><div class="garden-stem"></div><i class="garden-leaf"></i><i class="garden-leaf right"></i><div class="garden-head"><i class="garden-petal"></i><i class="garden-petal"></i><i class="garden-petal"></i><i class="garden-petal"></i><i class="garden-petal"></i><i class="garden-center"></i></div></div><div class="garden-flower"><div class="garden-stem"></div><i class="garden-leaf"></i><i class="garden-leaf right"></i><div class="garden-head"><i class="garden-petal"></i><i class="garden-petal"></i><i class="garden-petal"></i><i class="garden-petal"></i><i class="garden-petal"></i><i class="garden-center"></i></div></div></div><div class="garden-water" id="gardenWater"></div><p class="garden-note">“O amor floresce nos pequenos cuidados.”</p><div class="garden-controls"><button class="btn" id="plantBtn">＋ Plantar uma flor</button><button class="btn ghost" id="waterBtn">✧ Regar nosso jardim</button></div><p class="garden-status" id="gardenStatus" aria-live="polite">O jardim está esperando pelo seu carinho.</p></div></section>
 <section class="content reveal" id="musica"><div class="section-head"><span class="eyebrow">trilha sonora para nós</span><h2>Uma música para embalar seu dia.</h2><p>Escolhi uma canção romântica para acompanhar esse carinho. A música tentará começar assim que a página abrir; se o navegador bloquear o som automático, toque em play no vídeo.</p></div><div class="music-card glass"><iframe class="youtube-frame" src="https://www.youtube-nocookie.com/embed/sB8_zYjxSGg?autoplay=1&mute=0&rel=0&playsinline=1" title="Nando Reis e Ana Cañas — Pra Você Guardei o Amor" loading="eager" referrerpolicy="strict-origin-when-cross-origin" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe><div class="music-caption"><h3>Pra Você Guardei o Amor</h3><p>Nando Reis &amp; Ana Cañas · Clipe oficial no YouTube<br>Uma canção para lembrar que o amor merece ser cuidado todos os dias. ♡</p></div></div></section>
+<section class="content reveal" id="pocao"><div class="section-head"><span class="eyebrow">um toque de magia</span><h2>Uma poção de carinho.</h2><p>Um pequeno feitiço para transformar qualquer manhã em um dia mais bonito.</p></div><div class="potion-card glass"><div class="potion-orb" aria-hidden="true"></div><h3>Poção do amor verdadeiro</h3><p>Ingredientes: uma pitada de saudade, duas colheres de cuidado, uma dose de fé e amor suficiente para todos os dias.</p><button class="btn" id="potionBtn">Preparar minha poção ✧</button><div class="potion-result" id="potionResult" aria-live="polite">Toque no botão e descubra seu feitiço de hoje. ♡</div></div></section>
 <section class="content reveal" id="carta"><div class="section-head"><span class="eyebrow">escrita com o coração</span><h2>Uma cartinha para você.</h2><p>Se eu pudesse, começaria todas as manhãs te dando um abraço bem apertado.</p></div>
 <article class="letter"><div class="eyebrow">para Andressa, com amor</div><h2>Bom dia, minha vida. ❤️</h2>
 <p>Espero que você acorde com o coração tranquilo e encontre motivos para sorrir em cada pedacinho deste dia. Queria estar pertinho agora, te dar um beijo na testa, te abraçar forte e lembrar olhando nos seus olhos o quanto você é especial para mim.</p>
@@ -86,12 +113,13 @@ footer{text-align:center;padding:30px 15px 40px;color:#a98d9b;font-size:.65rem;l
 <section class="content reveal" id="historia"><div class="section-head"><span class="eyebrow">nossa caminhada</span><h2>Uma história que continua.</h2><p>Não são apenas datas. São capítulos de uma história que ainda tem muito para viver.</p></div>
 <div class="timeline"><article class="moment glass"><small>17 · 11 · 2024</small><h3>O começo de nós.</h3><p>O dia em que começou oficialmente uma das histórias mais especiais da minha vida.</p></article><article class="moment glass"><small>todos os dias depois</small><h3>Escolher e cuidar.</h3><p>Entre sorrisos, aprendizados e desafios, seguimos construindo nossa história, um dia de cada vez.</p></article><article class="moment glass"><small>o que ainda vem</small><h3>Nossos próximos capítulos.</h3><p>Mais abraços, conquistas, viagens, sonhos compartilhados e manhãs para desejar bom dia.</p></article></div></section>
 <section class="content reveal" id="memorias"><div class="section-head"><span class="eyebrow">nosso álbum</span><h2>Pequenos grandes momentos.</h2><p>Este espaço está esperando pelas nossas fotos favoritas. Depois, é só colocar as imagens na pasta e atualizar a lista no código.</p></div>
-<div class="memories" id="gallery"><div class="memory"><span><b>♡</b>Uma foto do nosso começo</span></div><div class="memory"><span><b>✧</b>Um momento inesquecível</span></div><div class="memory"><span><b>♡</b>Nosso sorriso favorito</span></div></div></section>
+<div class="photo-tools"><button class="btn" id="addPhotosBtn" type="button">＋ Adicionar nossas fotos</button><button class="btn ghost" id="clearPhotosBtn" type="button">Limpar fotos adicionadas</button><input id="photoInput" type="file" accept="image/*" multiple hidden></div><p class="photo-hint">Escolha fotos no seu celular. Elas ficam salvas neste navegador e neste aparelho.</p><div class="memories" id="gallery"><div class="memory"><span><b>♡</b>Uma foto do nosso começo</span></div><div class="memory"><span><b>✧</b>Um momento inesquecível</span></div><div class="memory"><span><b>♡</b>Nosso sorriso favorito</span></div></div></section>
 <section class="content reveal"><div class="section-head"><span class="eyebrow">um carinho por dia</span><h2>Seu motivo para sorrir.</h2></div><div class="daily glass"><span class="eyebrow">mensagem de hoje</span><blockquote id="dailyQuote">“Meu lugar favorito sempre vai ser onde você estiver.”</blockquote><button class="btn ghost" id="newQuote">Quero outra mensagem ♡</button></div></section>
 <section class="content reveal"><div class="night-sky glass"><div><div class="moon"></div><span class="eyebrow">uma oração por você</span><h2>Que Deus cuide de cada passo seu.</h2><p>“O amor é paciente, o amor é bondoso.” — 1 Coríntios 13:4. Que Nossa Senhora te cubra com seu manto e que nunca faltem fé, paz e esperança no seu coração.</p></div></div></section>
 <section class="content reveal"><div class="section-head"><span class="eyebrow">mesmo de longe</span><h2>Um abraço apertado.</h2></div><div class="hug-area glass"><span class="hug-heart">♡</span><p class="hug-message" id="hugMessage">Tem abraço meu guardadinho esperando por você.</p><button class="btn" id="hugBtn">Receber meu abraço ♡</button></div></section>
 <section class="final reveal"><div class="final-heart">♥</div><span class="eyebrow">e antes de ir...</span><h2>Eu escolheria<br><em>você outra vez.</em></h2><p>Em cada manhã, em cada fase e em cada novo capítulo. Obrigado por fazer parte da minha vida, Andressa. Que hoje seja lindo, meu amor. Eu te amo! ❤️</p><button class="btn" id="finalBtn">Eu te amo também ♡</button></section>
 </main>
+<div class="float-tools"><button id="backToTop" type="button" aria-label="Voltar ao topo" title="Voltar ao topo">↑</button><button id="quickGarden" type="button" aria-label="Ir para nosso jardim" title="Nosso jardim">❀</button></div>
 <footer>feito com carinho para Andressa <span class="footer-heart">♥</span> · 17.11.2024</footer><div class="toast" id="toast" role="status" aria-live="polite"></div>
 
 <script>
@@ -118,5 +146,78 @@ document.getElementById("plantBtn").addEventListener("click",()=>{if(gardenBed.c
 document.getElementById("waterBtn").addEventListener("click",()=>{gardenWater.classList.remove("active");void gardenWater.offsetWidth;gardenWater.classList.add("active");gardenStatus.textContent="Jardim regado! Que nosso amor continue florescendo. ♡";petals(12)});
 const gallery=document.getElementById("gallery");if(CONFIG.photos.length){gallery.innerHTML="";CONFIG.photos.slice(0,20).forEach((src,i)=>{const card=document.createElement("div");card.className="memory";const img=document.createElement("img");img.src=src;img.alt="Memória especial do casal "+(i+1);img.loading="lazy";card.appendChild(img);gallery.appendChild(card)})}
 const observer=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add("in");observer.unobserve(e.target)}}),{threshold:.12});document.querySelectorAll(".reveal").forEach(el=>observer.observe(el));
+
+/* Recursos extras: poção diária, galeria pessoal e navegação */
+const potionLines=[
+"Feitiço de hoje: que seu sorriso ilumine até os caminhos que parecem nublados. ✨",
+"Poção preparada: uma dose de coragem, duas de paz e amor infinito para acompanhar você.",
+"Encantamento: que Deus guie seus passos e que Nossa Senhora cuide de você em cada instante. ♡",
+"Fórmula secreta: nunca se esqueça de que você é amada, admirada e capaz de realizar seus sonhos.",
+"Feitiço do abraço: mesmo quando eu não estiver pertinho, meu carinho encontra um jeito de chegar até você.",
+"Poção especial: que hoje a vida devolva em dobro toda a luz bonita que existe em você.",
+"Encantamento do nosso amor: cuidar, respeitar, ter paciência e escolher um ao outro todos os dias."
+];
+document.getElementById("potionBtn")?.addEventListener("click",()=>{
+ const result=document.getElementById("potionResult");
+ const line=potionLines[Math.floor(Math.random()*potionLines.length)];
+ result.animate([{opacity:.15,transform:"translateY(8px) scale(.98)"},{opacity:1,transform:"none"}],{duration:500});
+ result.textContent=line;petals(14);
+});
+const progress=document.getElementById("readingProgress");
+function updateReadingProgress(){
+ const max=document.documentElement.scrollHeight-innerHeight;
+ progress.style.width=(max>0?Math.min(100,scrollY/max*100):0)+"%";
+}
+addEventListener("scroll",updateReadingProgress,{passive:true});updateReadingProgress();
+document.getElementById("backToTop")?.addEventListener("click",()=>scrollTo({top:0,behavior:reduce?"auto":"smooth"}));
+document.getElementById("quickGarden")?.addEventListener("click",()=>document.getElementById("jardim").scrollIntoView({behavior:reduce?"auto":"smooth"}));
+
+/* Galeria: fotos escolhidas pela Andressa ficam neste navegador, sem envio a servidor. */
+(()=>{
+ const input=document.getElementById("photoInput"),add=document.getElementById("addPhotosBtn");
+ const clear=document.getElementById("clearPhotosBtn"),gallery=document.getElementById("gallery");
+ if(!input||!add||!gallery)return;
+ const KEY="andressa-love-gallery-v1";let photos=[];
+ try{photos=JSON.parse(localStorage.getItem(KEY)||"[]");if(!Array.isArray(photos))photos=[]}catch{photos=[]}
+ function persist(){try{localStorage.setItem(KEY,JSON.stringify(photos));return true}catch{notify("O armazenamento deste aparelho está cheio. Remova algumas fotos e tente novamente.");return false}}
+ function draw(){
+  gallery.innerHTML="";
+  if(!photos.length){gallery.innerHTML='<div class="memory"><span><b>♡</b>Uma foto do nosso começo</span></div><div class="memory"><span><b>✧</b>Um momento inesquecível</span></div><div class="memory"><span><b>♡</b>Nosso sorriso favorito</span></div>';return}
+  photos.forEach((src,i)=>{
+   const card=document.createElement("div");card.className="memory uploaded";
+   const img=document.createElement("img");img.className="uploaded-photo";img.src=src;img.alt="Foto especial do casal "+(i+1);
+   const label=document.createElement("span");label.className="photo-label";label.textContent="Uma lembrança nossa ♡";
+   const del=document.createElement("button");del.className="remove-photo";del.type="button";del.textContent="×";del.setAttribute("aria-label","Remover foto "+(i+1));
+   del.addEventListener("click",()=>{photos.splice(i,1);persist();draw();notify("Foto removida da galeria deste aparelho.")});
+   card.append(img,label,del);gallery.appendChild(card);
+  });
+ }
+ function compress(file){return new Promise((resolve,reject)=>{
+  const reader=new FileReader();reader.onerror=reject;
+  reader.onload=()=>{const img=new Image();img.onerror=reject;img.onload=()=>{
+   const scale=Math.min(1,1200/Math.max(img.width,img.height));
+   const canvas=document.createElement("canvas");canvas.width=Math.round(img.width*scale);canvas.height=Math.round(img.height*scale);
+   canvas.getContext("2d").drawImage(img,0,0,canvas.width,canvas.height);resolve(canvas.toDataURL("image/jpeg",.78));
+  };img.src=reader.result};reader.readAsDataURL(file);
+ })}
+ add.addEventListener("click",()=>input.click());
+ input.addEventListener("change",async()=>{
+  const files=Array.from(input.files||[]).filter(f=>f.type.startsWith("image/"));
+  if(!files.length)return;
+  if(photos.length+files.length>6){notify("A galeria aceita até 6 fotos. Remova alguma antes de adicionar outras.");input.value="";return}
+  for(const file of files){
+   if(file.size>12*1024*1024){notify("Uma foto passou de 12 MB e foi ignorada.");continue}
+   try{const src=await compress(file);photos.push(src);if(!persist()){photos.pop();break}}
+   catch{notify("Não consegui carregar uma das imagens. Tente outra foto.")}
+  }
+  draw();input.value="";notify("Suas lembranças foram adicionadas a este aparelho. ♡");
+ });
+ clear.addEventListener("click",()=>{
+  if(!photos.length){notify("Ainda não há fotos adicionadas.");return}
+  photos=[];persist();draw();notify("A galeria voltou ao estado inicial.");
+ });
+ draw();
+})();
+
 </script>
 </body></html>
