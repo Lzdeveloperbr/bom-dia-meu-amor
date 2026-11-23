@@ -85,7 +85,7 @@ footer{text-align:center;padding:30px 15px 40px;color:#a98d9b;font-size:.65rem;l
 <body>
 <div class="reading-progress" id="readingProgress" aria-hidden="true"></div>
 <div class="noise"></div><div class="glow a"></div><div class="glow b"></div><div class="stars" id="stars"></div>
-<header><div class="brand">um presente <span>♡</span> para Andressa</div><nav><a href="#jardim">jardim</a><a href="#carta">carta</a><a href="#historia">história</a><a href="#memorias">memórias</a></nav><button class="sound" id="musicBtn" type="button" aria-label="Ir para a música">♫ Música</button></header>
+<header><div class="brand">um presente <span>♡</span> para Andressa</div><nav><a href="#jardim">jardim</a><a href="#pocao">magia</a><a href="#carta">carta</a><a href="#historia">história</a><a href="#memorias">memórias</a></nav><button class="sound" id="musicBtn" type="button" aria-label="Ir para a música">♫ Música</button></header>
 <main>
 <section class="hero">
 <div class="hero-inner">
@@ -93,7 +93,7 @@ footer{text-align:center;padding:30px 15px 40px;color:#a98d9b;font-size:.65rem;l
 <p class="kicker">uma manhã mais bonita começa com você</p>
 <h1>Bom dia,<em>meu amor.</em></h1>
 <p class="hero-copy">Andressa, fiz esse cantinho só para você. Que ele seja um lembrete delicado de que existe alguém que pensa em você, torce por você e te ama muito.</p>
-<button class="btn" id="startBtn">Descobrir minha surpresa&nbsp; ♡</button><div class="scroll-note">um carinho feito especialmente para você<span>⌄</span></div>
+<div style="display:flex;justify-content:center;gap:10px;flex-wrap:wrap"><button class="btn" id="startBtn">Descobrir minha surpresa&nbsp; ♡</button><button class="btn ghost" id="shareSiteBtn" type="button">Compartilhar esse carinho ↗</button></div><div class="scroll-note">um carinho feito especialmente para você<span>⌄</span></div>
 </div></section>
 <section class="content reveal" id="rosa"><div class="section-head"><span class="eyebrow">um pequeno símbolo</span><h2>Uma flor para você.</h2><p>Toque na rosa e veja florescer um carinho que não cabe em palavras.</p></div>
 <div class="rose-stage glass"><div class="rose-orbit"></div><button class="rose-button" id="roseBtn" aria-label="Fazer a rosa florescer">
@@ -130,6 +130,7 @@ for(let i=0;i<65;i++){const s=document.createElement("i");s.className="star";s.s
 const toast=document.getElementById("toast");let toastTimer;
 function notify(t){toast.textContent=t;toast.classList.add("show");clearTimeout(toastTimer);toastTimer=setTimeout(()=>toast.classList.remove("show"),2600)}
 function petals(n=18){if(reduce)return;const symbols=["✿","♡","❀","✧"];for(let i=0;i<n;i++){const p=document.createElement("span");p.className="petal";p.textContent=symbols[Math.floor(Math.random()*symbols.length)];p.style.left=Math.random()*100+"vw";p.style.setProperty("--x",(Math.random()*180-90)+"px");p.style.setProperty("--d",(4+Math.random()*4)+"s");p.style.fontSize=(12+Math.random()*15)+"px";document.body.appendChild(p);p.addEventListener("animationend",()=>p.remove(),{once:true})}}
+document.getElementById("shareSiteBtn")?.addEventListener("click",async()=>{const data={title:"Bom dia, meu amor ♡",text:"Preparei um cantinho cheio de carinho para você. ❤️",url:location.href};try{if(navigator.share){await navigator.share(data)}else if(navigator.clipboard?.writeText){await navigator.clipboard.writeText(location.href);notify("Link copiado! Agora é só compartilhar. ♡")}else{notify("Copie o endereço do site para compartilhar. ♡")}}catch(e){if(e.name!=="AbortError")notify("Não foi possível compartilhar agora.")}});
 document.getElementById("startBtn").addEventListener("click",()=>{document.getElementById("rosa").scrollIntoView({behavior:reduce?"auto":"smooth"});petals(24)});
 document.getElementById("roseBtn").addEventListener("click",()=>{const bloom=document.getElementById("bloom");bloom.animate([{transform:"scale(.65) rotate(-18deg)"},{transform:"scale(1.12) rotate(8deg)"},{transform:"scale(1) rotate(0)"}],{duration:900,easing:"cubic-bezier(.2,.8,.2,1)"});document.getElementById("roseCaption").textContent="Assim como essa flor, meu carinho por você floresce todos os dias. ♡";petals(22)});
 document.getElementById("letterHeart").addEventListener("click",()=>{notify("Esse carinho é todinho seu, meu amor. ♡");petals(12)});
