@@ -5,27 +5,29 @@ Experiência romântica criada especialmente para Andressa. Site estático, resp
 ## Site
 https://lzdeveloperbr.github.io/bom-dia-meu-amor/
 
-## O que tem
-- Abertura cinematográfica com céu estrelado e brilho ambiente.
-- Rosa SVG com animação interativa e pétalas.
-- Carta romântica personalizada.
-- Contador de relacionamento desde **17/11/2024** (anos, meses, dias, horas e minutos).
-- Linha do tempo sem inventar acontecimentos pessoais.
-- Espaço para fotos do casal.
-- Mensagem diária, abraço virtual e mensagem final.
-- Player opcional de música, que só toca após interação.
-- Layout adaptado para celular e desktop, com respeito a redução de movimento.
+## Recursos
+- Abertura cinematográfica, céu estrelado, partículas e animações delicadas.
+- Rosa interativa, jardim onde é possível plantar e regar flores.
+- Música do YouTube com tentativa de reprodução automática (o navegador pode exigir um toque para liberar o som).
+- Carta romântica e contador desde **17/11/2024**.
+- Linha do tempo, mensagens diárias, abraço virtual e oração.
+- Poção de carinho com mensagens mágicas diferentes.
+- Galeria para adicionar até 6 fotos diretamente pelo celular.
+- Fotos adicionadas ficam armazenadas localmente no navegador/aparelho; não são enviadas ao GitHub nem a um servidor.
+- Botão para compartilhar o link do site.
+- Barra de progresso de leitura, atalhos flutuantes e layout adaptado para celular e desktop.
+- Respeito à preferência do sistema por movimento reduzido.
 
-## Personalização rápida
-O conteúdo principal está em `index.html`. No início do script há um objeto `CONFIG`:
+## Como adicionar fotos
+1. Abra o site no aparelho em que deseja guardar as fotos.
+2. Vá até **Memórias** e toque em **Adicionar nossas fotos**.
+3. Escolha até 6 imagens. Elas serão redimensionadas e guardadas no armazenamento local do navegador.
+4. Para remover uma imagem, toque no **×** sobre ela. O botão **Limpar fotos adicionadas** limpa toda a galeria local.
 
-- `startDate`: data de início do relacionamento.
-- `photos`: lista de caminhos/URLs das fotografias que deseja exibir.
-- `musicPath`: caminho da música opcional.
+As fotos ficam salvas apenas naquele navegador e aparelho. Se limpar os dados do navegador ou trocar de aparelho, será necessário adicioná-las novamente.
 
-Para adicionar música, coloque um arquivo autorizado chamado `nossa-musica.mp3` dentro de `assets/`. O player não inicia sozinho; a pessoa precisa tocar no botão Música.
-
-Para fotos, coloque as imagens no repositório e informe seus caminhos no array `photos`, por exemplo: `["assets/foto-1.jpg","assets/foto-2.jpg"]`.
+## Personalização
+O conteúdo principal está em `index.html`. A data do relacionamento está no objeto `CONFIG`, em `startDate`.
 
 ## Publicação
-As alterações na branch `main` são publicadas pelo GitHub Pages/GitHub Actions conforme a configuração do repositório. Após o commit, aguarde a conclusão do workflow para ver a versão atualizada.
+As alterações na branch `main` são publicadas pelo GitHub Pages/GitHub Actions. Aguarde a conclusão do workflow e atualize a página para conferir a nova versão.
