@@ -1,162 +1,90 @@
 <!doctype html>
 <html lang="pt-BR">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#4b1729">
-  <meta name="description" content="Uma mensagem especial de bom dia para Andressa, feita com amor.">
-  <title>Bom dia, Andressa ❤️</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500;1,600&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --wine: #4b1729; --wine2: #702b43; --rose: #d58a9d;
-      --blush: #f5dfe3; --cream: #fff9f4; --ink: #38232a;
-      --muted: #8e747b; --gold: #d8b58b;
-    }
-    * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
-    body {
-      margin: 0; min-height: 100vh; color: var(--cream);
-      font-family: "DM Sans", sans-serif; overflow-x: hidden;
-      background: radial-gradient(ellipse at 50% 12%, #8b4057 0%, #5a2035 34%, #321321 100%);
-    }
-    body::before {
-      content: ""; position: fixed; inset: 0; pointer-events: none; opacity: .13;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.3'/%3E%3C/svg%3E");
-      z-index: 5;
-    }
-    .ambient { position: fixed; width: 42rem; height: 42rem; border-radius: 50%; filter: blur(90px); opacity: .14; pointer-events:none; }
-    .ambient.one { background:#f2a4b8; top:-25rem; left:-12rem; }
-    .ambient.two { background:#d6a56d; right:-25rem; bottom:-25rem; }
-    .topline { position:relative; z-index:2; display:flex; justify-content:center; padding:27px 20px 0; }
-    .brand { letter-spacing:.24em; text-transform:uppercase; font-size:.65rem; color:#f4d9df; display:flex; gap:10px; align-items:center; }
-    .brand::before,.brand::after { content:""; width:25px; height:1px; background:var(--gold); opacity:.8; }
-    main { position:relative; z-index:1; width:min(100% - 36px, 920px); margin:0 auto; }
-    .hero { min-height:calc(100svh - 55px); display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center; padding:48px 0 72px; }
-    .eyebrow { color:#e9bdc8; font-size:.7rem; letter-spacing:.3em; text-transform:uppercase; margin:0 0 23px; animation:rise .9s both; }
-    h1 { font:500 clamp(3.2rem, 10vw, 7.3rem)/.98 "Playfair Display",serif; letter-spacing:-.055em; margin:0; text-shadow:0 12px 45px #1b091366; animation:rise 1s .1s both; }
-    h1 span { color:#f1c7d0; font-style:italic; display:block; }
-    .hero-copy { color:#f3dfe3; max-width:470px; line-height:1.8; font-size:.96rem; margin:25px auto 31px; animation:rise 1s .2s both; }
-    .sun { width:112px; height:112px; margin:0 auto 27px; position:relative; display:grid; place-items:center; animation:float 6s ease-in-out infinite; }
-    .sun::before { content:""; position:absolute; inset:0; border:1px solid #edc5ce88; border-radius:50%; box-shadow:0 0 55px #f0b7c633,inset 0 0 35px #f0b7c622; }
-    .sun::after { content:""; position:absolute; inset:12px; border:1px solid #edc5ce55; border-radius:50%; }
-    .sun svg { width:43px; height:43px; stroke:#f1c9a0; }
-    .primary {
-      border:1px solid #f2cbd4aa; color:var(--wine); background:linear-gradient(135deg,#fff5ef,#f0cbd3);
-      border-radius:999px; padding:15px 25px; font:600 .78rem "DM Sans",sans-serif;
-      letter-spacing:.08em; text-transform:uppercase; cursor:pointer; box-shadow:0 12px 35px #1c091c55;
-      transition:transform .25s,box-shadow .25s; animation:rise 1s .3s both;
-    }
-    .primary:hover { transform:translateY(-3px); box-shadow:0 17px 40px #1c091c77; }
-    .primary:focus-visible,.close:focus-visible { outline:3px solid #fff; outline-offset:4px; }
-    .hint { margin-top:16px; color:#d9b8c0; font-size:.7rem; letter-spacing:.08em; }
-    .section { padding:80px 0; }
-    .paper-wrap { max-width:700px; margin:0 auto; color:var(--ink); background:var(--cream); border-radius:5px; padding:clamp(28px,7vw,65px); position:relative; box-shadow:0 30px 90px #18071366; transform:translateY(24px); opacity:0; transition:opacity .8s,transform .8s; }
-    .paper-wrap.visible { transform:translateY(0); opacity:1; }
-    .paper-wrap::before { content:""; position:absolute; inset:10px; border:1px solid #e8d4ce; pointer-events:none; }
-    .letter-kicker { text-align:center; color:#a56d7b; letter-spacing:.25em; text-transform:uppercase; font-size:.63rem; margin:0 0 18px; }
-    .letter-title { font:500 clamp(2rem,6vw,3.4rem)/1.1 "Playfair Display",serif; text-align:center; color:var(--wine); margin:0 0 28px; }
-    .letter-body { font:400 clamp(1rem,2.2vw,1.13rem)/2 "Playfair Display",serif; color:#5b454b; }
-    .letter-body p { margin:0 0 17px; }
-    .signature { text-align:right; font:italic 1.65rem "Playfair Display",serif; color:#9a596d; margin-top:28px; }
-    .seal { width:48px; height:48px; border-radius:50%; background:var(--wine2); color:#f8dce2; display:grid; place-items:center; margin:32px auto 0; box-shadow:0 5px 18px #4b172933; }
-    .closing { text-align:center; padding:45px 0 95px; }
-    .closing .small { color:#e8c2cb; text-transform:uppercase; letter-spacing:.28em; font-size:.65rem; }
-    .closing h2 { font:500 clamp(2.2rem,7vw,4.5rem)/1.1 "Playfair Display",serif; margin:17px 0; }
-    .closing h2 em { color:#f1c7d0; }
-    .closing p { color:#e6cbd1; line-height:1.8; max-width:450px; margin:0 auto; font-size:.9rem; }
-    footer { text-align:center; color:#bd929e; font-size:.68rem; letter-spacing:.08em; padding:0 20px 30px; }
-    .heart { position:fixed; z-index:8; pointer-events:none; color:#f5c5d0; animation:drift 4.5s ease-out forwards; text-shadow:0 0 15px #f8b8ca; }
-    .hidden { display:none; }
-    .reveal { animation:fadeIn .8s both; }
-    @keyframes rise { from { opacity:0; transform:translateY(22px); } to { opacity:1; transform:translateY(0); } }
-    @keyframes float { 0%,100% { transform:translateY(0) } 50% { transform:translateY(-11px) } }
-    @keyframes fadeIn { from { opacity:0 } to { opacity:1 } }
-    @keyframes drift { 0% { opacity:0; transform:translateY(0) scale(.6) rotate(0) } 15% {opacity:.9} 100% {opacity:0; transform:translateY(-105vh) scale(1.3) rotate(28deg)} }
-    @media (prefers-reduced-motion: reduce) { *,*::before,*::after { animation-duration:.01ms!important; animation-iteration-count:1!important; scroll-behavior:auto!important; transition-duration:.01ms!important; } }
-  </style>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#160e1c"><meta name="description" content="Uma experiência feita com amor para Andressa.">
+<title>Bom dia, meu amor — Andressa ♡</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500;1,600&display=swap" rel="stylesheet">
+<style>
+:root{--night:#160e1c;--wine:#4b2036;--rose:#e6a9b9;--pink:#f5d8df;--cream:#fff8f2;--gold:#e7c69a;--muted:#cbb5c1;--line:#ffffff22;--serif:"Playfair Display",Georgia,serif;--sans:"DM Sans",Arial,sans-serif}
+*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:80px}body{margin:0;background:var(--night);color:var(--cream);font-family:var(--sans);overflow-x:hidden}button{font:inherit}a{color:inherit}.noise{position:fixed;inset:0;pointer-events:none;z-index:20;opacity:.07;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.5'/%3E%3C/svg%3E")}.glow{position:fixed;width:42vw;height:42vw;border-radius:50%;filter:blur(100px);opacity:.18;pointer-events:none;z-index:-1}.glow.a{background:#b34d77;top:-25vw;left:-15vw}.glow.b{background:#d5a06d;right:-20vw;bottom:-25vw}.stars{position:fixed;inset:0;pointer-events:none;z-index:-1;overflow:hidden}.star{position:absolute;width:2px;height:2px;border-radius:50%;background:#fff1d6;box-shadow:0 0 9px 2px #f5d7df77;animation:twinkle var(--t) ease-in-out infinite alternate}
+header{position:fixed;z-index:15;top:0;left:0;right:0;display:flex;align-items:center;justify-content:space-between;padding:18px clamp(18px,5vw,64px);background:linear-gradient(#160e1cbb,transparent);backdrop-filter:blur(8px)}.brand{font-size:.66rem;letter-spacing:.23em;text-transform:uppercase;color:#f2d7df}.brand span{color:var(--gold)}nav{display:flex;gap:22px}nav a{text-decoration:none;font-size:.68rem;color:#ddc9d1;letter-spacing:.08em;transition:color .2s}nav a:hover{color:white}.sound{border:1px solid var(--line);background:#ffffff0b;color:#f7dfe5;border-radius:99px;padding:9px 13px;font-size:.7rem;cursor:pointer}
+main{width:min(100% - 36px,980px);margin:auto}.hero{min-height:100svh;display:grid;place-items:center;text-align:center;padding:110px 0 75px;position:relative}.hero-inner{max-width:760px}.kicker{font-size:.65rem;letter-spacing:.34em;text-transform:uppercase;color:#e7b7c6;margin:0 0 25px}.hero h1{font:500 clamp(3.7rem,11vw,8.6rem)/.92 var(--serif);letter-spacing:-.065em;margin:0;text-shadow:0 15px 55px #0008}.hero h1 em{display:block;color:#f1c6d2;font-weight:500}.hero-copy{max-width:490px;margin:28px auto 30px;line-height:1.9;color:#e6d4db;font-size:.94rem}.sun{width:116px;height:116px;margin:0 auto 30px;position:relative;display:grid;place-items:center;animation:float 7s ease-in-out infinite;perspective:500px}.sun:before,.sun:after{content:"";position:absolute;border:1px solid #f0cbd477;border-radius:50%;inset:0;box-shadow:0 0 55px #e9aabc33,inset 0 0 30px #e9aabc22}.sun:after{inset:13px;transform:rotateX(65deg) rotateZ(20deg)}.sun svg{width:42px;stroke:var(--gold);filter:drop-shadow(0 0 12px #e7c69a88)}.btn{border:1px solid #f3d4dc99;color:#442035;background:linear-gradient(135deg,#fff8f2,#eec6d1);border-radius:99px;padding:15px 23px;font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;box-shadow:0 12px 40px #0005;transition:transform .25s,box-shadow .25s}.btn:hover{transform:translateY(-3px);box-shadow:0 18px 45px #0007}.btn.ghost{background:#ffffff0b;color:#f8e5ea;border-color:#ffffff33;box-shadow:none}.scroll-note{margin-top:26px;color:#c5aab6;font-size:.65rem;letter-spacing:.16em;text-transform:uppercase}.scroll-note span{display:block;margin-top:8px;font-size:1rem;animation:bob 1.5s infinite}
+section.content{padding:95px 0;position:relative}.section-head{text-align:center;margin:0 auto 40px;max-width:620px}.eyebrow{font-size:.62rem;letter-spacing:.3em;text-transform:uppercase;color:var(--gold)}h2{font:500 clamp(2.4rem,7vw,4.8rem)/1.05 var(--serif);letter-spacing:-.04em;margin:13px 0 16px}.section-head p{color:var(--muted);line-height:1.8;font-size:.9rem}.glass{background:linear-gradient(145deg,#ffffff12,#ffffff05);border:1px solid #ffffff20;border-radius:24px;box-shadow:0 25px 80px #0004;backdrop-filter:blur(16px)}
+.rose-stage{min-height:440px;display:grid;place-items:center;position:relative;overflow:hidden}.rose-orbit{position:absolute;width:min(75vw,340px);aspect-ratio:1;border:1px solid #f0c5d322;border-radius:50%;box-shadow:0 0 70px #edabc01c,inset 0 0 50px #edabc015;animation:spin 35s linear infinite}.rose-orbit:before,.rose-orbit:after{content:"✧";position:absolute;color:#f4d7df;font-size:1.1rem}.rose-orbit:before{top:8%;left:20%}.rose-orbit:after{right:13%;bottom:18%}.rose-button{position:relative;width:230px;height:280px;border:0;background:transparent;cursor:pointer;filter:drop-shadow(0 22px 25px #0007);transition:transform .5s}.rose-button:hover{transform:scale(1.05) rotateY(8deg)}.rose-svg{width:100%;height:100%;overflow:visible;animation:float 5s ease-in-out infinite}.rose-caption{position:absolute;bottom:26px;text-align:center;color:#e9cbd4;font:italic 1.1rem var(--serif)}
+.letter{max-width:720px;margin:auto;padding:clamp(28px,7vw,65px);background:linear-gradient(135deg,#fffaf4,#f7e8e3);color:#49333b;border-radius:4px;position:relative;box-shadow:0 30px 90px #0007;transform:rotateX(5deg);transition:transform .7s}.letter:before{content:"";position:absolute;inset:10px;border:1px solid #e8d4ce;pointer-events:none}.letter .eyebrow{text-align:center;color:#a56d7b}.letter h2{text-align:center;color:#5b263e}.letter p{font:400 clamp(1rem,2.3vw,1.12rem)/2 var(--serif);color:#604b52}.signature{text-align:right;font:italic 1.6rem var(--serif);color:#985d70;margin-top:28px}.letter-actions{text-align:center;margin-top:22px}
+.counter{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;max-width:700px;margin:30px auto}.count{padding:24px 8px;text-align:center}.count strong{display:block;font:500 clamp(2rem,6vw,3.5rem) var(--serif);color:#f3cbd5;font-variant-numeric:tabular-nums}.count span{font-size:.62rem;letter-spacing:.16em;text-transform:uppercase;color:#cdb3bf}.since{text-align:center;color:#cbb5c1;font-size:.76rem}
+.timeline{max-width:680px;margin:auto;position:relative;padding:10px 0}.timeline:before{content:"";position:absolute;left:20px;top:0;bottom:0;width:1px;background:linear-gradient(transparent,#d99bad,#d8b58b,transparent)}.moment{position:relative;margin:0 0 18px 54px;padding:22px 24px}.moment:before{content:"";position:absolute;width:10px;height:10px;border-radius:50%;background:#f1c8d2;left:-39px;top:29px;box-shadow:0 0 15px #f1c8d2}.moment small{color:var(--gold);letter-spacing:.16em;text-transform:uppercase;font-size:.62rem}.moment h3{font:500 1.5rem var(--serif);margin:8px 0}.moment p{margin:0;color:var(--muted);font-size:.85rem;line-height:1.7}
+.memories{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.memory{aspect-ratio:4/5;display:grid;place-items:center;text-align:center;padding:15px;border:1px dashed #ffffff40;border-radius:18px;background:linear-gradient(145deg,#ffffff0d,#ffffff03);color:#d7bdc7;overflow:hidden;position:relative}.memory img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0}.memory span{position:relative;font-size:.72rem;line-height:1.6}.memory b{display:block;font:italic 1.25rem var(--serif);color:#f1c9d3;margin-bottom:6px}
+.daily{text-align:center;padding:42px 25px;max-width:720px;margin:auto}.daily blockquote{font:italic clamp(1.5rem,4vw,2.5rem)/1.4 var(--serif);margin:20px auto;color:#f4dce3;max-width:570px}.daily .btn{margin-top:12px}
+.night-sky{min-height:400px;display:grid;place-items:center;text-align:center;overflow:hidden;position:relative}.moon{width:95px;height:95px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#fff7e5,#e4c8c0 55%,#b78d9b);box-shadow:0 0 70px #e9c5d477,0 0 150px #e9c5d422;margin:0 auto 30px;position:relative}.moon:after{content:"";position:absolute;width:95px;height:95px;border-radius:50%;background:#24172b;left:25px;top:-8px}.night-sky h2{max-width:650px}.night-sky p{color:#d2bdca;line-height:1.8;max-width:480px;margin:auto}
+.hug-area{text-align:center;padding:30px}.hug-heart{font-size:5rem;display:block;filter:drop-shadow(0 0 24px #f1aabe88);animation:heartbeat 1.7s infinite}.hug-message{min-height:56px;color:#f1d6df;line-height:1.7;margin:22px auto;max-width:520px}
+.final{text-align:center;padding:110px 0 100px}.final-heart{font-size:4rem;color:#f0c3d0;text-shadow:0 0 40px #f0a5bd;animation:heartbeat 1.8s infinite}.final h2{font-size:clamp(2.8rem,8vw,5.7rem)}.final h2 em{color:#f0c3d0}.final p{color:#d8c2cd;line-height:1.9;max-width:550px;margin:20px auto 28px}
+footer{text-align:center;padding:30px 15px 40px;color:#a98d9b;font-size:.65rem;letter-spacing:.12em}.footer-heart{color:#e9aabd}
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .8s,transform .8s}.reveal.in{opacity:1;transform:translateY(0)}.petal{position:fixed;z-index:10;top:-35px;pointer-events:none;color:#f0b7c7;text-shadow:0 0 12px #e7a7ba;animation:fall var(--d) linear forwards}
+.toast{position:fixed;z-index:30;bottom:22px;left:50%;transform:translate(-50%,20px);opacity:0;pointer-events:none;background:#fff5f0;color:#512b40;padding:12px 18px;border-radius:99px;font-size:.78rem;box-shadow:0 10px 35px #0006;transition:.3s}.toast.show{opacity:1;transform:translate(-50%,0)}
+@keyframes float{50%{transform:translateY(-12px)}}@keyframes spin{to{transform:rotate(360deg)}}@keyframes twinkle{to{opacity:.2;transform:scale(.5)}}@keyframes rise{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:none}}@keyframes bob{50%{transform:translateY(5px)}}@keyframes fall{to{transform:translate3d(var(--x),110vh,0) rotate(520deg);opacity:0}}@keyframes heartbeat{0%,100%{transform:scale(1)}12%{transform:scale(1.12)}24%{transform:scale(1)}36%{transform:scale(1.08)}48%{transform:scale(1)}} 
+@media(max-width:650px){header{padding:14px 16px}.brand{font-size:.58rem}nav{gap:11px}nav a{font-size:.58rem}nav a:nth-child(2),nav a:nth-child(3){display:none}.sound{padding:8px 10px}.hero{min-height:94svh}.rose-stage{min-height:380px}.memories{grid-template-columns:repeat(2,1fr)}.memory:last-child{display:none}.counter{grid-template-columns:repeat(2,1fr);max-width:380px}.count{padding:18px 6px}.moment{margin-left:45px;padding:19px}.timeline:before{left:15px}.moment:before{left:-35px}.content{padding:70px 0!important}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition-duration:.01ms!important}}
+</style>
 </head>
 <body>
-  <div class="ambient one"></div><div class="ambient two"></div>
-  <header class="topline"><div class="brand">feito com carinho</div></header>
-  <main>
-    <section class="hero" aria-labelledby="headline">
-      <div class="sun" aria-hidden="true">
-        <svg viewBox="0 0 48 48" fill="none" stroke-width="1.5" stroke-linecap="round">
-          <circle cx="24" cy="24" r="8"/><path d="M24 3v6M24 39v6M3 24h6M39 24h6M9.15 9.15l4.25 4.25m21.2 21.2 4.25 4.25m0-29.7-4.25 4.25m-21.2 21.2-4.25 4.25"/>
-        </svg>
-      </div>
-      <p class="eyebrow">um novo dia, um carinho de sempre</p>
-      <h1 id="headline">Bom dia,<span>Andressa.</span></h1>
-      <p class="hero-copy">Que a primeira coisa bonita do seu dia seja lembrar o quanto você é especial para mim.</p>
-      <button class="primary" id="openLetter" type="button">Abrir minha mensagem <span aria-hidden="true">♡</span></button>
-      <div class="hint">preparei uma surpresa para você</div>
-    </section>
-    <section class="section hidden" id="letterSection" aria-live="polite">
-      <article class="paper-wrap" id="letter">
-        <p class="letter-kicker">para você, com todo meu amor</p>
-        <h2 class="letter-title">Bom dia, meu amor! ❤️</h2>
-        <div class="letter-body">
-          <p>Bom dia, minha Andressa! ❤️</p>
-          <p>Espero que você tenha acordado bem e que hoje encontre motivos para sorrir em cada pequeno momento. Queria poder começar a manhã pertinho de você, te dar um abraço apertado e lembrar pessoalmente o quanto você é importante para mim.</p>
-          <p>Que seu dia seja leve, que Deus cuide de cada passo seu e que nunca faltem paz no seu coração, força para conquistar seus sonhos e motivos para ser feliz.</p>
-          <p>Mesmo quando a distância ou a correria não deixam a gente ficar juntinho, quero que você saiba que meu carinho está com você. Você é uma parte muito bonita da minha vida.</p>
-          <p>Se cuida, aproveita seu dia e não esquece: tem alguém aqui torcendo por você, pensando em você e querendo te ver feliz.</p>
-        </div>
-        <div class="signature">Com amor, sempre. ♡</div>
-        <div class="seal" aria-hidden="true">♡</div>
-      </article>
-    </section>
-    <section class="closing">
-      <div class="small">um lembrete para hoje</div>
-      <h2>Você merece um dia<br><em>lindo como seu sorriso.</em></h2>
-      <p>Que Deus abençoe sua manhã, ilumine seus caminhos e encha seu coração de coisas boas. ❤️</p>
-    </section>
-  </main>
-  <footer>feito especialmente para Andressa · com amor, hoje e sempre</footer>
-  <script>
-    const button = document.getElementById('openLetter');
-    const section = document.getElementById('letterSection');
-    const letter = document.getElementById('letter');
-    let opened = false;
-    button.addEventListener('click', () => {
-      if (!opened) {
-        opened = true;
-        section.classList.remove('hidden');
-        requestAnimationFrame(() => {
-          letter.classList.add('visible');
-          section.scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'center' });
-        });
-        button.innerHTML = 'Mensagem aberta <span aria-hidden="true">♥</span>';
-        button.setAttribute('aria-expanded', 'true');
-        burstHearts();
-      } else {
-        section.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        burstHearts();
-      }
-    });
-    function burstHearts() {
-      const symbols = ['♡','♥','✧','❀'];
-      for (let i = 0; i < 18; i++) {
-        const el = document.createElement('span');
-        el.className = 'heart';
-        el.textContent = symbols[Math.floor(Math.random() * symbols.length)];
-        el.style.left = (8 + Math.random() * 84) + 'vw';
-        el.style.bottom = '-30px';
-        el.style.fontSize = (13 + Math.random() * 19) + 'px';
-        el.style.animationDuration = (3.2 + Math.random() * 2.2) + 's';
-        document.body.appendChild(el);
-        el.addEventListener('animationend', () => el.remove(), { once: true });
-      }
-    }
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) entry.target.classList.add('visible');
-      });
-    }, { threshold: .12 });
-    observer.observe(letter);
-  </script>
-</body>
-</html>
+<div class="noise"></div><div class="glow a"></div><div class="glow b"></div><div class="stars" id="stars"></div>
+<header><div class="brand">um presente <span>♡</span> para Andressa</div><nav><a href="#carta">carta</a><a href="#historia">história</a><a href="#memorias">memórias</a></nav><button class="sound" id="musicBtn" type="button" aria-label="Ativar música">♫ Música</button></header>
+<main>
+<section class="hero">
+<div class="hero-inner">
+<div class="sun" aria-hidden="true"><svg viewBox="0 0 48 48" fill="none" stroke-width="1.4" stroke-linecap="round"><circle cx="24" cy="24" r="8"/><path d="M24 2v7m0 30v7M2 24h7m30 0h7M8.5 8.5l5 5m21 21 5 5m0-31-5 5m-21 21-5 5"/></svg></div>
+<p class="kicker">uma manhã mais bonita começa com você</p>
+<h1>Bom dia,<em>meu amor.</em></h1>
+<p class="hero-copy">Andressa, fiz esse cantinho só para você. Que ele seja um lembrete delicado de que existe alguém que pensa em você, torce por você e te ama muito.</p>
+<button class="btn" id="startBtn">Descobrir minha surpresa&nbsp; ♡</button><div class="scroll-note">um carinho feito especialmente para você<span>⌄</span></div>
+</div></section>
+<section class="content reveal" id="rosa"><div class="section-head"><span class="eyebrow">um pequeno símbolo</span><h2>Uma flor para você.</h2><p>Toque na rosa e veja florescer um carinho que não cabe em palavras.</p></div>
+<div class="rose-stage glass"><div class="rose-orbit"></div><button class="rose-button" id="roseBtn" aria-label="Fazer a rosa florescer">
+<svg class="rose-svg" viewBox="0 0 230 280" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="petal" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#ffd5df"/><stop offset=".5" stop-color="#d86c91"/><stop offset="1" stop-color="#812d53"/></linearGradient><linearGradient id="leaf" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#9dbb91"/><stop offset="1" stop-color="#355b49"/></linearGradient></defs><path d="M115 130 C112 175 120 210 111 260" stroke="#63866b" stroke-width="5" fill="none"/><path d="M114 208 C75 170 47 201 104 224Z" fill="url(#leaf)"/><path d="M115 231 C154 187 183 212 122 246Z" fill="url(#leaf)"/><g id="bloom"><path d="M115 128 C55 116 69 54 110 71 C93 24 158 22 143 76 C192 51 202 111 145 126 C178 147 143 177 115 143 C82 175 43 143 87 119Z" fill="url(#petal)" stroke="#f4b4c7" stroke-width="1.2"/><path d="M115 128 C75 99 100 54 123 83 C151 57 177 101 139 126 C160 150 124 164 115 137 C96 158 75 129 115 128Z" fill="#b94370"/><path d="M115 128 C98 105 120 83 135 102 C151 118 131 144 115 128Z" fill="#f5b6c8"/><path d="M112 123 Q118 109 128 119 Q131 130 119 134Z" fill="#7b294b"/></g></svg></button><div class="rose-caption" id="roseCaption">para a minha pessoa favorita ♡</div></div></section>
+<section class="content reveal" id="carta"><div class="section-head"><span class="eyebrow">escrita com o coração</span><h2>Uma cartinha para você.</h2><p>Se eu pudesse, começaria todas as manhãs te dando um abraço bem apertado.</p></div>
+<article class="letter"><div class="eyebrow">para Andressa, com amor</div><h2>Bom dia, minha vida. ❤️</h2>
+<p>Espero que você acorde com o coração tranquilo e encontre motivos para sorrir em cada pedacinho deste dia. Queria estar pertinho agora, te dar um beijo na testa, te abraçar forte e lembrar olhando nos seus olhos o quanto você é especial para mim.</p>
+<p>Desde 17 de novembro de 2024, a minha história ganhou capítulos que quero continuar escrevendo ao seu lado. Nem todos os dias são perfeitos, mas meu desejo é continuar cuidando do que construímos, aprendendo, amadurecendo e escolhendo você.</p>
+<p>Que Deus ilumine seus caminhos, proteja seus passos e te dê força para realizar seus sonhos. Nunca duvide do seu valor e nunca se esqueça de que eu estou aqui, torcendo por você.</p>
+<p>Que seu dia seja leve, bonito e cheio de pequenas alegrias. E quando sentir saudade, lembra que tem alguém contando os minutos para te ver de novo.</p>
+<div class="signature">Com todo meu amor, sempre. ♡</div><div class="letter-actions"><button class="btn ghost" id="letterHeart">Guardar esse carinho ♡</button></div></article></section>
+<section class="content reveal" id="tempo"><div class="section-head"><span class="eyebrow">desde o nosso começo</span><h2>O tempo com você.</h2><p>Cada dia é mais um pedacinho da nossa história.</p></div>
+<div class="counter"><div class="count glass"><strong id="years">0</strong><span>anos</span></div><div class="count glass"><strong id="days">0</strong><span>dias</span></div><div class="count glass"><strong id="hours">00</strong><span>horas</span></div><div class="count glass"><strong id="minutes">00</strong><span>minutos</span></div></div><p class="since">Nossa história começou em 17 de novembro de 2024. ❤️</p></section>
+<section class="content reveal" id="historia"><div class="section-head"><span class="eyebrow">nossa caminhada</span><h2>Uma história que continua.</h2><p>Não são apenas datas. São capítulos de uma história que ainda tem muito para viver.</p></div>
+<div class="timeline"><article class="moment glass"><small>17 · 11 · 2024</small><h3>O começo de nós.</h3><p>O dia em que começou oficialmente uma das histórias mais especiais da minha vida.</p></article><article class="moment glass"><small>todos os dias depois</small><h3>Escolher e cuidar.</h3><p>Entre sorrisos, aprendizados e desafios, seguimos construindo nossa história, um dia de cada vez.</p></article><article class="moment glass"><small>o que ainda vem</small><h3>Nossos próximos capítulos.</h3><p>Mais abraços, conquistas, viagens, sonhos compartilhados e manhãs para desejar bom dia.</p></article></div></section>
+<section class="content reveal" id="memorias"><div class="section-head"><span class="eyebrow">nosso álbum</span><h2>Pequenos grandes momentos.</h2><p>Este espaço está esperando pelas nossas fotos favoritas. Depois, é só colocar as imagens na pasta e atualizar a lista no código.</p></div>
+<div class="memories" id="gallery"><div class="memory"><span><b>♡</b>Uma foto do nosso começo</span></div><div class="memory"><span><b>✧</b>Um momento inesquecível</span></div><div class="memory"><span><b>♡</b>Nosso sorriso favorito</span></div></div></section>
+<section class="content reveal"><div class="section-head"><span class="eyebrow">um carinho por dia</span><h2>Seu motivo para sorrir.</h2></div><div class="daily glass"><span class="eyebrow">mensagem de hoje</span><blockquote id="dailyQuote">“Meu lugar favorito sempre vai ser onde você estiver.”</blockquote><button class="btn ghost" id="newQuote">Quero outra mensagem ♡</button></div></section>
+<section class="content reveal"><div class="night-sky glass"><div><div class="moon"></div><span class="eyebrow">uma oração por você</span><h2>Que Deus cuide de cada passo seu.</h2><p>“O amor é paciente, o amor é bondoso.” — 1 Coríntios 13:4. Que Nossa Senhora te cubra com seu manto e que nunca faltem fé, paz e esperança no seu coração.</p></div></div></section>
+<section class="content reveal"><div class="section-head"><span class="eyebrow">mesmo de longe</span><h2>Um abraço apertado.</h2></div><div class="hug-area glass"><span class="hug-heart">♡</span><p class="hug-message" id="hugMessage">Tem abraço meu guardadinho esperando por você.</p><button class="btn" id="hugBtn">Receber meu abraço ♡</button></div></section>
+<section class="final reveal"><div class="final-heart">♥</div><span class="eyebrow">e antes de ir...</span><h2>Eu escolheria<br><em>você outra vez.</em></h2><p>Em cada manhã, em cada fase e em cada novo capítulo. Obrigado por fazer parte da minha vida, Andressa. Que hoje seja lindo, meu amor. Eu te amo! ❤️</p><button class="btn" id="finalBtn">Eu te amo também ♡</button></section>
+</main>
+<footer>feito com carinho para Andressa <span class="footer-heart">♥</span> · 17.11.2024</footer><div class="toast" id="toast" role="status" aria-live="polite"></div>
+<audio id="music" preload="none" loop src="assets/nossa-musica.mp3"></audio>
+<script>
+const CONFIG={startDate:"2024-11-17T00:00:00",photos:[],musicPath:"assets/nossa-musica.mp3"};
+const reduce=matchMedia("(prefers-reduced-motion: reduce)").matches;
+const stars=document.getElementById("stars");
+for(let i=0;i<65;i++){const s=document.createElement("i");s.className="star";s.style.left=Math.random()*100+"%";s.style.top=Math.random()*100+"%";s.style.opacity=.25+Math.random()*.7;s.style.setProperty("--t",(2+Math.random()*4)+"s");stars.appendChild(s)}
+const toast=document.getElementById("toast");let toastTimer;
+function notify(t){toast.textContent=t;toast.classList.add("show");clearTimeout(toastTimer);toastTimer=setTimeout(()=>toast.classList.remove("show"),2600)}
+function petals(n=18){if(reduce)return;const symbols=["✿","♡","❀","✧"];for(let i=0;i<n;i++){const p=document.createElement("span");p.className="petal";p.textContent=symbols[Math.floor(Math.random()*symbols.length)];p.style.left=Math.random()*100+"vw";p.style.setProperty("--x",(Math.random()*180-90)+"px");p.style.setProperty("--d",(4+Math.random()*4)+"s");p.style.fontSize=(12+Math.random()*15)+"px";document.body.appendChild(p);p.addEventListener("animationend",()=>p.remove(),{once:true})}}
+document.getElementById("startBtn").addEventListener("click",()=>{document.getElementById("rosa").scrollIntoView({behavior:reduce?"auto":"smooth"});petals(24)});
+document.getElementById("roseBtn").addEventListener("click",()=>{const bloom=document.getElementById("bloom");bloom.animate([{transform:"scale(.65) rotate(-18deg)"},{transform:"scale(1.12) rotate(8deg)"},{transform:"scale(1) rotate(0)"}],{duration:900,easing:"cubic-bezier(.2,.8,.2,1)"});document.getElementById("roseCaption").textContent="Assim como essa flor, meu carinho por você floresce todos os dias. ♡";petals(22)});
+document.getElementById("letterHeart").addEventListener("click",()=>{notify("Esse carinho é todinho seu, meu amor. ♡");petals(12)});
+function updateCounter(){const start=new Date(CONFIG.startDate),now=new Date();let y=now.getFullYear()-start.getFullYear();let anniversary=new Date(start);anniversary.setFullYear(start.getFullYear()+y);if(now<anniversary)y--;const next=new Date(start);next.setFullYear(start.getFullYear()+y);const elapsed=now-next;const d=Math.floor(elapsed/86400000),h=Math.floor(elapsed%86400000/3600000),m=Math.floor(elapsed%3600000/60000);document.getElementById("years").textContent=y;document.getElementById("days").textContent=d;document.getElementById("hours").textContent=String(h).padStart(2,"0");document.getElementById("minutes").textContent=String(m).padStart(2,"0")}
+updateCounter();setInterval(updateCounter,30000);
+const quotes=["Meu lugar favorito sempre vai ser onde você estiver.","Seu sorriso é uma das minhas partes favoritas da vida.","Eu escolheria você de novo, em todos os começos.","Que sorte a minha poder chamar você de amor.","Você faz até os dias comuns terem algo especial.","Meu pensamento mais bonito hoje tem seu nome.","Que nunca faltem motivos para a gente sorrir juntinho.","Você é meu presente favorito da vida.","Quero ser abraço, cuidado e paz nos seus dias.","Ainda temos tantas manhãs bonitas para viver."];
+const dayIndex=Math.floor(Date.now()/86400000)%quotes.length;let lastQuote=dayIndex;document.getElementById("dailyQuote").textContent="“"+quotes[dayIndex]+"”";
+document.getElementById("newQuote").addEventListener("click",()=>{let n;do{n=Math.floor(Math.random()*quotes.length)}while(n===lastQuote);lastQuote=n;const q=document.getElementById("dailyQuote");q.animate([{opacity:0,transform:"translateY(8px)"},{opacity:1,transform:"none"}],{duration:450});q.textContent="“"+quotes[n]+"”";petals(8)});
+document.getElementById("hugBtn").addEventListener("click",()=>{document.getElementById("hugMessage").textContent="Fecha os olhos por um instante e imagina meus braços te envolvendo. Um abraço demorado, daqueles que dizem tudo sem precisar falar. Eu te amo! ❤️";petals(30)});
+document.getElementById("finalBtn").addEventListener("click",()=>{notify("Eu te amo mais do que cabe nesta página, Andressa! ❤️");petals(45)});
+const music=document.getElementById("music"),musicBtn=document.getElementById("musicBtn");let musicReady=false;
+musicBtn.addEventListener("click",async()=>{if(!musicReady){try{await music.play();musicReady=true;musicBtn.textContent="Ⅱ Pausar";notify("Música ativada ♡")}catch(e){notify("Adicione sua música em assets/nossa-musica.mp3 para ativar.");}}else if(music.paused){await music.play();musicBtn.textContent="Ⅱ Pausar"}else{music.pause();musicBtn.textContent="♫ Música"}});
+const gallery=document.getElementById("gallery");if(CONFIG.photos.length){gallery.innerHTML="";CONFIG.photos.slice(0,20).forEach((src,i)=>{const card=document.createElement("div");card.className="memory";const img=document.createElement("img");img.src=src;img.alt="Memória especial do casal "+(i+1);img.loading="lazy";card.appendChild(img);gallery.appendChild(card)})}
+const observer=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add("in");observer.unobserve(e.target)}}),{threshold:.12});document.querySelectorAll(".reveal").forEach(el=>observer.observe(el));
+</script>
+</body></html>
