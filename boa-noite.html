@@ -45,6 +45,38 @@ nav.night-nav{display:flex;gap:16px;align-items:center}nav.night-nav a{font-size
 @media(max-width:600px){nav.night-nav{gap:9px}nav.night-nav a{font-size:.55rem}.music-stage{grid-template-columns:90px 1fr;gap:15px}.vinyl{width:90px}.heart-stage{height:240px}.promise-grid{grid-template-columns:1fr}.envelope{height:210px}}
 @media(prefers-reduced-motion:reduce){.heart-3d,.vinyl{animation:none!important}}
 
+
+/* Revisão mobile: navegação e envelope */
+html{scroll-padding-top:88px}
+body{min-width:320px}
+header{gap:14px;min-width:0}
+.brand{flex:0 0 auto}
+nav.night-nav{min-width:0;max-width:100%;overflow-x:auto;overscroll-behavior-x:contain;scrollbar-width:none;white-space:nowrap}
+nav.night-nav::-webkit-scrollbar{display:none}
+nav.night-nav a{flex:0 0 auto}
+.envelope-wrap{width:100%;padding:clamp(18px,5vw,32px)!important;overflow:visible}
+.envelope{width:min(100%,440px);height:clamp(190px,52vw,245px);margin:30px auto 24px;filter:drop-shadow(0 18px 26px #0006);touch-action:manipulation;isolation:isolate}
+.envelope-back{z-index:0}
+.envelope-paper{z-index:1;left:7%;right:7%;bottom:8px;height:88%;padding:clamp(14px,4vw,24px);font-size:clamp(1rem,4vw,1.28rem);line-height:1.55;overflow-wrap:anywhere;transition:transform .75s cubic-bezier(.2,.75,.25,1)}
+.envelope-flap{z-index:4;backface-visibility:hidden;-webkit-backface-visibility:hidden;transform-origin:top center;will-change:transform}
+.envelope-front{z-index:3;backface-visibility:hidden;-webkit-backface-visibility:hidden;transition:opacity .35s ease,transform .65s ease}
+.envelope.open .envelope-flap{transform:rotateX(180deg);z-index:0}
+.envelope.open .envelope-paper{transform:translateY(-58%);z-index:2}
+.envelope.open .envelope-front{transform:translateY(18%);opacity:.18;z-index:1}
+.envelope:focus-visible,.heart-3d:focus-visible,.constellation button:focus-visible{outline:3px solid var(--gold);outline-offset:6px}
+@media(max-width:600px){
+ header{align-items:flex-start;padding:14px 12px;gap:10px}
+ .brand{max-width:95px;line-height:1.5;letter-spacing:.14em}
+ nav.night-nav{gap:7px;padding:2px 0 8px}
+ nav.night-nav a{font-size:.56rem;padding:9px 11px}
+ .hero{min-height:82svh;padding-top:72px}
+ .envelope{height:clamp(190px,58vw,225px);width:100%}
+ .envelope.open .envelope-paper{transform:translateY(-52%)}
+ .envelope-wrap .tiny{max-width:100%;padding:0 4px}
+}
+@media(max-width:370px){header{flex-wrap:wrap}nav.night-nav{width:100%;justify-content:flex-start}.envelope-paper{font-size:.98rem}}
+@media(prefers-reduced-motion:reduce){.envelope-paper,.envelope-flap,.envelope-front{transition:none!important}}
+
 </style>
 </head>
 <body>
@@ -54,8 +86,6 @@ nav.night-nav{display:flex;gap:16px;align-items:center}nav.night-nav a{font-size
 <section class="hero"><div class="hero-inner"><span class="eyebrow">antes que o dia termine</span><h1>Boa noite,<em>meu amor.</em></h1><p class="intro">meu amor, que a noite abrace você com a mesma ternura com que eu gostaria de te abraçar agora. Deixe as preocupações descansarem. Você merece paz, carinho e sonhos bonitos.</p><button class="primary" id="openLetter">Tenho um carinho para você ♡</button><div class="scroll">uma pausa só nossa<span>⌄</span></div></div></section>
 <section class="reveal" id="carta"><div class="heading"><span class="eyebrow">escrito antes de dormir</span><h2>Uma última lembrança para hoje.</h2><p>Leia devagar, como se cada palavra fosse um abraço meu.</p></div><article class="letter"><div class="eyebrow">para meu amor, com todo meu amor</div><h2>Durma bem, minha vida. ❤️</h2><p>Meu amor, antes de você fechar os olhos, quero que saiba o quanto é especial para mim. Mesmo quando não consigo estar pertinho, meu pensamento encontra um jeito de chegar até você. Queria poder te cobrir, dar um beijo na sua testa e ficar abraçadinho até você pegar no sono.</p><p>Obrigado por fazer parte da minha vida e por dividir comigo essa história que começou em 17 de novembro de 2024. Quero continuar construindo nossos dias com respeito, paciência, cuidado e muito amor. Não precisamos ter todas as respostas hoje; amanhã é mais uma oportunidade de fazer tudo um pouquinho melhor.</p><p>Que Deus acalme seu coração, cuide dos seus sonhos e ilumine o seu caminho. Entregue a Ele o que pesou hoje. Você não precisa carregar o mundo nos ombros. Descanse, minha princesa. Amanhã eu quero ver esse sorriso lindo de novo.</p><p>Se eu pudesse escolher onde estar agora, escolheria ao seu lado. Até lá, recebe todo o meu carinho em forma destas palavras. Boa noite, meu amor. Eu te amo!</p><div class="sign">Seu Alan, que te ama. ♡</div></article></section>
 <section class="reveal"><div class="heading"><span class="eyebrow">respira comigo</span><h2>Deixe o coração desacelerar.</h2><p>Uma pausa curtinha para soltar o peso do dia e encontrar tranquilidade.</p></div><div class="breathe glass"><div class="orb" id="breathOrb"><span id="breathText">Paz</span></div><p id="breathInstruction">Quando estiver pronta, comece um ciclo tranquilo de respiração.</p><button class="secondary" id="breathBtn">Começar momento de paz</button><div class="breathe-status" id="breathStatus" aria-live="polite">Sem pressa. Este momento é seu.</div></div></section>
-<section class="reveal"><div class="heading"><span class="eyebrow">uma oração por você</span><h2>Que Deus guarde seu descanso.</h2></div><div class="prayer glass"><div class="symbol">✧</div><blockquote>“Em paz me deito e logo adormeço, pois só tu, Senhor, me fazes viver em segurança.”</blockquote><p>Salmo 4:8</p><p>Senhor, cuida da meu amor nesta noite. Afasta a ansiedade, renova suas forças e enche seu coração de serenidade. Que ela acorde amanhã com saúde, esperança e motivos para sorrir. Amém. ❤️</p></div></section>
-
 <section class="reveal" id="musica"><div class="heading"><span class="eyebrow">nossa trilha sonora</span><h2>Uma música para embalar seus sonhos.</h2><p>Coloque o coração em modo descanso. Preparei uma canção romântica para acompanhar esta noite.</p></div><div class="music-card glass"><div class="music-stage"><div class="vinyl" id="vinyl"></div><div class="music-meta"><span class="eyebrow">para ouvir pensando em nós</span><h3>Perfect</h3><p>Ed Sheeran · Uma canção romântica para deixar tocando enquanto você descansa.</p><div class="music-actions"><button class="primary" id="playMusic">▶ Tocar nossa música</button><button class="secondary" id="stopMusic">Pausar</button></div></div></div><div id="musicFrameWrap"></div><p class="music-note">A música é reproduzida pelo YouTube. O navegador pode exigir que você toque no botão para liberar o áudio. Se o vídeo não carregar, use <a href="https://www.youtube.com/watch?v=2Vv-BfVoq4g" target="_blank" rel="noopener" style="color:#f0c3d4">abrir a música no YouTube</a>.</p></div></section>
 <section class="reveal"><div class="heading"><span class="eyebrow">um sentimento em três dimensões</span><h2>Meu coração tem seu nome.</h2><p>Um pequeno universo girando em torno de uma certeza: meu carinho por você.</p></div><div class="glass"><div class="heart-stage"><div class="heart-ring"></div><div class="heart-ring r2"></div><div class="heart-3d" id="heart3d" role="button" tabindex="0" aria-label="Toque no coração para espalhar carinho">💗</div></div><p class="tiny">Toque no coração para espalhar carinho pelo céu.</p></div></section>
 <section class="reveal" id="poema"><div class="heading"><span class="eyebrow">escrito só para você</span><h2>Um poema de boa noite.</h2></div><article class="poem-card glass"><span class="eyebrow">quando a noite encontra o amor</span><h3>Até nos meus sonhos</h3><p>Quando a noite veste o céu de luar,
@@ -109,6 +139,15 @@ document.querySelectorAll("[data-wish]").forEach(b=>b.addEventListener("click",(
 const envelope=document.getElementById("envelope");function toggleEnvelope(){envelope.classList.toggle("open");document.getElementById("envelopeHint").textContent=envelope.classList.contains("open")?"Uma mensagem só sua. Guarde esse carinho. ♡":"Toque no envelope para abrir sua surpresa." ;if(envelope.classList.contains("open"))petals(16)}
 envelope.addEventListener("click",toggleEnvelope);envelope.addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();toggleEnvelope()}});
 document.querySelectorAll(".glass").forEach(card=>{card.addEventListener("pointermove",e=>{if(reduce||e.pointerType!=="mouse"||card.classList.contains("prayer"))return;const r=card.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;if(r.width>480)card.style.transform="perspective(1000px) rotateX("+(-y*1.7)+"deg) rotateY("+(x*1.7)+"deg) translateY(-2px)"});card.addEventListener("pointerleave",()=>card.style.transform="")});
+
+
+/* Fallback para navegadores sem IntersectionObserver */
+if(!("IntersectionObserver" in window)){
+ document.querySelectorAll(".reveal").forEach(el=>el.classList.add("visible"));
+}
+document.addEventListener("visibilitychange",()=>{
+ if(document.hidden && breathing){clearTimeout(breathTimer);breathing=false;const b=document.getElementById("breathBtn");if(b)b.textContent="Começar momento de paz";}
+});
 
 if("serviceWorker" in navigator && location.protocol.startsWith("http")){window.addEventListener("load",()=>navigator.serviceWorker.register("./sw.js").catch(()=>{}))}
 </script>
