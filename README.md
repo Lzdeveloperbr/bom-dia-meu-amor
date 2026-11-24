@@ -1,6 +1,6 @@
 # Bom dia, meu amor ❤️
 
-Experiência romântica criada especialmente para Andressa. Site estático, responsivo e publicado pelo GitHub Pages.
+Experiência romântica criada especialmente para meu amor. Site estático, responsivo e publicado pelo GitHub Pages.
 
 ## Sites
 - **Bom dia:** https://lzdeveloperbr.github.io/bom-dia-meu-amor/
@@ -22,7 +22,7 @@ Experiência romântica criada especialmente para Andressa. Site estático, resp
 ## Nova experiência de boa noite
 A página `boa-noite.html` é uma experiência noturna independente, com:
 - Céu estrelado animado, lua interativa e visual noturno responsivo.
-- Carta personalizada para Andressa, com referência ao início do relacionamento em **17/11/2024**.
+- Carta personalizada para meu amor, com referência ao início do relacionamento em **17/11/2024**.
 - Exercício opcional de respiração guiada para desacelerar antes de dormir.
 - Oração inspirada no Salmo 4:8.
 - Abraço virtual, beijo de boa noite e chuva delicada de corações.
@@ -49,3 +49,7 @@ O conteúdo de bom dia está em `index.html`; a experiência noturna está em `b
 
 ## Publicação
 As alterações na branch `main` são publicadas pelo GitHub Pages/GitHub Actions. Aguarde a conclusão do workflow e atualize a página para conferir a nova versão.
+
+
+## Atualização visual — experiência noturna imersiva
+A página de boa noite foi ampliada com animações 3D em CSS, coração 3D interativo, cards com efeito de inclinação, toca-discos animado e música “Perfect”, de Ed Sheeran, incorporada pelo YouTube após toque do usuário, poema original, constelação de desejos clicáveis, carta-surpresa em envelope animado, promessas de carinho e oração ampliada pelo relacionamento. O player depende do YouTube e da conexão; o navegador pode bloquear reprodução automática até a pessoa tocar em reproduzir.
