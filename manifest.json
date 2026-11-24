@@ -1,7 +1,7 @@
 {
-  "name": "Boa noite, meu amor — Andressa",
-  "short_name": "Boa noite ♡",
-  "description": "Uma experiência romântica de boa noite feita para Andressa.",
+  "name": "Boa noite, meu amor",
+  "short_name": "Meu amor ♡",
+  "description": "Uma noite especial com música, poesia, oração e carinho.",
   "lang": "pt-BR",
   "start_url": "./boa-noite.html",
   "scope": "./",
